@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  ratebeer-db:
+    image: postgres
+    environment:
+      POSTGRES_USER: "ratebeer"
+      POSTGRES_PASSWORD: "ratebeer"
+    volumes:
+      - ./postgres-db/:/var/lib/postgresql/data
+    container_name: ratebeer-db
+
+  ratebeer:
+    image: ratebeer
+    build:
+      dockerfile: Dockerfile
+    environment:
+      RAILS_ENV: "production"
+    ports:
+      - 5005:3000
+    container_name: ratebeer
+    depends_on:
+      - "ratebeer-db"
+
