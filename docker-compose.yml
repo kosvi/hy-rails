@@ -15,6 +15,7 @@ services:
     image: ratebeer
     build:
       dockerfile: Dockerfile
+      context: .
     environment:
       RAILS_ENV: "production"
     ports:
