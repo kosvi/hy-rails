@@ -4,3 +4,13 @@ This is a mandatory exercise for [Ruby on Rails -course](https://github.com/mluu
 
 Live instance can be found at: [ratebeer.codecache.eu](https://ratebeer.codecache.eu)
 
+## INSTALLATION
+
+1. Clone repository
+
+2. Create `config/master.key`
+
+3. Run `sudo docker-compose up -d`
+
+4. Drop shell inside `ratebeer` image and run `rails db:migrate`
+
