@@ -4,4 +4,6 @@
   <% @ratings.each do |rating| %>
     <li> <%= render rating %> </li>
   <% end %>
+
+  <%= link_to 'add new rating', ratings_new_path %>
 </ul>

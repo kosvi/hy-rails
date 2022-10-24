@@ -2,6 +2,10 @@ class Beer < ApplicationRecord
   belongs_to :brewery
   has_many :ratings
 
+  def to_s
+    self.name + " by " + self.brewery.name
+  end
+
   def average_rating
     count = self.ratings.count
     if count > 0
