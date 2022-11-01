@@ -19,4 +19,12 @@
     <% end %>
   </p>
 
+  <p>
+    <% if brewery.ratings.empty? %>
+      Brewery has no ratings yet!
+    <% else %>
+      Brewery has <%= "#{pluralize(brewery.ratings.count, 'rating')}" %>  with an average of <%= brewery.average_rating %>
+    <% end %>
+  </p>
+
 </div>

@@ -18,12 +18,12 @@
 
   <div>
     <%= form.label :style, style: "display: block" %>
-    <%= form.text_field :style %>
+    <%= form.select :style, options_for_select(@styles) %>
   </div>
 
   <div>
     <%= form.label :brewery_id, style: "display: block" %>
-    <%= form.number_field :brewery_id %>
+    <%= form.select :brewery_id, options_from_collection_for_select(@breweries, :id, :to_s) %>
   </div>
 
   <div>
