@@ -5,11 +5,11 @@ class Brewery < ApplicationRecord
   has_many :ratings, through: :beers
 
   def to_s
-    self.name
+    name
   end
 
   def restart
     self.year = Date.current.year
-    puts "changed year to #{self.year}"
+    puts "changed year to #{year}"
   end
 end

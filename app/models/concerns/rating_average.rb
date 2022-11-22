@@ -2,9 +2,9 @@ module RatingAverage
   extend ActiveSupport::Concern
 
   def average_rating
-    count = self.ratings.count
-    if count > 0
-      self.ratings.map {|r| r.score}.inject {|sum, num| sum + num} / count
-    end
+    count = ratings.count
+    return unless count > 0
+
+    ratings.map(&:score).inject { |sum, num| sum + num } / count
   end
 end
