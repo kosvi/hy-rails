@@ -1,7 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @user %>
-
+<div>
+  <h2>Username:</h2>
+  <p>
+    <%= @user.username %>
+  </p>
+</div>
+<p>
+  <% if @user.ratings.empty? %>
+    Has made no ratings yet!
+  <% else %>
+    Has made <%= "#{pluralize(@user.ratings.count, 'rating')}" %>, average being <%= @user.average_rating %>
+  <% end %>
+</p>
+<ul>
+  <% @user.ratings.each do |rating| %>
+    <li> <%= render rating %> <%= link_to "delete", rating, data: { "turbo-method": :delete } %> </li>
+  <% end %>
+</ul>
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
