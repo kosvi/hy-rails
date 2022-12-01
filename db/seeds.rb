@@ -17,3 +17,10 @@ b2.beers.create name: "Huvila Pale Ale", style: "Pale Ale"
 b2.beers.create name: "X Porter", style: "Porter"
 b3.beers.create name: "Hefeweizen", style: "Weizen"
 b3.beers.create name: "Helles", style: "Lager"
+
+u1 = User.create username: "testuser"
+bc1 = BeerClub.create name: "BeginnersClub", founded: 1900
+m1 = Membership.new
+m1.user = u1
+m1.beer_club = bc1
+m1.save
