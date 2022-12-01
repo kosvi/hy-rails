@@ -1,6 +1,19 @@
 <h1>New membership</h1>
 
-<%= render "form", membership: @membership %>
+<%= form_for(@membership) do |f| %>
+  <% if @membership.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@membership.errors.count, "error") %> prohibited membership being created:</h2>
+      <ul>
+      <% @membership.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
+  <%= f.submit %>
+<% end %>
 
 <br>
 
