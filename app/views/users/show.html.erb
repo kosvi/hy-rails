@@ -18,6 +18,12 @@
     <li> <%= render rating %> <%= link_to "delete", rating, data: { "turbo-method": :delete } %> </li>
   <% end %>
 </ul>
+<h2>Clubs</h2>
+<ul>
+<% @user.beer_clubs.each do |club| %>
+  <li> <%= club %></li>
+<% end %>
+</ul>
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>

@@ -2,6 +2,13 @@
 
 <%= render @beer_club %>
 
+<h2>Members</h2>
+<ul>
+<% @beer_club.users.each do |user| %>
+  <li> <%= user.username %></li>
+<% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) %> |
   <%= link_to "Back to beer clubs", beer_clubs_path %>
