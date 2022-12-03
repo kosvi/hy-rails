@@ -26,6 +26,9 @@ class MembershipsController < ApplicationController
 
   # POST /memberships or /memberships.json
   def create
+
+    @exinsting = Membership.where('user_id = ? AND beer_club_id = ?', current_user, membership_params[:beer_club_id]).first
+    raise "already a member" if @exinsting
     @membership = Membership.new(membership_params)
     @membership.user = current_user
 
@@ -72,6 +75,9 @@ class MembershipsController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
+  def beer_club_params
+    params.permit(:beer_club_id)
+  end
   def membership_params
     params.require(:membership).permit(:beer_club_id, :user_id)
   end
