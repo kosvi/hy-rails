@@ -14,3 +14,14 @@ Live instance can be found at: [ratebeer.codecache.eu](https://ratebeer.codecach
 
 4. Drop shell inside `ratebeer` container and run `rails db:migrate`
 
+## Update
+
+1. Pull latest changes: `git pull`
+
+2. Stop current instance of app
+
+3. Run `sudo docker-compose build`
+
+4. Start app: `sudo docker-compose up -d`
+
+5. Drop shell inside `ratebeer` container and run `rails db:migrate`
