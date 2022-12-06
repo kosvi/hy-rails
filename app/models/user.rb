@@ -9,8 +9,8 @@ class User < ApplicationRecord
   PASSWORD_REQUIREMENTS = /\A(?=.{4,})(?=.*[a-z])(?=.*[A-Z])/x
   validates :password, format: PASSWORD_REQUIREMENTS
 
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :beer_clubs, through: :memberships
 end
