@@ -14,7 +14,7 @@ Live instance can be found at: [ratebeer.codecache.eu](https://ratebeer.codecach
 
 4. Drop shell inside `ratebeer` container and run `rails db:migrate`
 
-## Update
+## UPDATE
 
 1. Pull latest changes: `git pull`
 
