@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Beer, type: :model do
   describe "with a proper brewery" do
-    let(:brewery) { Brewery.new name: "Test name", year: 1900 }
+    let(:brewery) { FactoryBot.create(:brewery) }
 
     it "is saved if other properties are given correctly" do
       beer = Beer.create name: "Name", style: "Style", brewery: brewery
