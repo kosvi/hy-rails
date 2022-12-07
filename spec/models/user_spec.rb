@@ -14,6 +14,20 @@ RSpec.describe User, type: :model do
     expect(User.count).to eq(0)
   end
 
+  it "is not saved with too short password" do 
+    user = User.create username: "Pekka", password: "Abc", password_confirmation: "Abc"
+
+    expect(user.valid?).to be(false)
+    expect(User.count).to eq(0)
+  end
+
+  it "is not saved with all lowercase password" do
+    user = User.create username: "Pekka", password: "abcdef", password_confirmation: "abcdef"
+
+    expect(user.valid?).to be(false)
+    expect(User.count).to eq(0)
+  end
+
   describe "with a proper password" do
     let(:user){ User.create username: "Pekka", password: "Secret1", password_confirmation: "Secret1" }
     let(:test_brewery) { Brewery.new name: "test", year: 2000 }
