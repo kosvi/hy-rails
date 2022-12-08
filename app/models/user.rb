@@ -19,4 +19,11 @@ class User < ApplicationRecord
 
     ratings.order(score: :desc).limit(1).first.beer
   end
+
+  def favorite_style
+    return nil if ratings.empty?
+
+    # beers.group(:style).average('ratings.score').sort_by { |style, avg| avg }.last.first()
+    beers.group(:style).average('ratings.score').max_by { |_style, avg| avg }.first
+  end
 end

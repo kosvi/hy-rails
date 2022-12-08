@@ -22,6 +22,9 @@
     </li>
   <% end %>
 </ul>
+<div>
+  Favourite beer style: <%= @user.favorite_style %>
+</div>
 <h2>Clubs</h2>
 <ul>
 <% @user.beer_clubs.each do |club| %>
