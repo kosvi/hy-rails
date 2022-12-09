@@ -7,6 +7,7 @@ describe "Rating" do
   let!(:beer1) { FactoryBot.create :beer, name: "iso 3", brewery:brewery }
   let!(:beer2) { FactoryBot.create :beer, name: "Karhu", brewery:brewery }
   let!(:user) { FactoryBot.create :user }
+  let!(:user2) { FactoryBot.create :user, username: "Paavo" }
 
   before :each do
     # visit signin_path
@@ -30,13 +31,29 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "list page lists all ratings from db and displays total count" do
-    create_beers_with_many_ratings({user: user, brewery: brewery}, 10, 20, 30)
-    visit ratings_path
+  describe "lists" do
 
-    expect(page).to have_content "anonymous 10 Pekka"
-    expect(page).to have_content "anonymous 20 Pekka"
-    expect(page).to have_content "anonymous 30 Pekka"
-    expect(page).to have_content "a total of 3 ratings"
+    before :each do
+      create_beers_with_many_ratings({user: user, brewery: brewery}, 10, 20, 30)
+    end
+
+    it "all ratings from db and displays total count" do
+      visit ratings_path
+
+      expect(page).to have_content "anonymous 10 Pekka"
+      expect(page).to have_content "anonymous 20 Pekka"
+      expect(page).to have_content "anonymous 30 Pekka"
+      expect(page).to have_content "a total of 3 ratings"
+    end
+
+    it "only users own ratings on profile page" do
+      create_beers_with_many_ratings({user: user2, brewery: brewery}, 15, 25, 35)
+      visit user_path(user2)
+
+      expect(page).to have_content "Has made 3 ratings, average being 25"
+      expect(page).to have_content "anonymous 15"
+      expect(page).to have_content "anonymous 25"
+      expect(page).to have_content "anonymous 35"
+    end
   end
 end
