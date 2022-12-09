@@ -26,4 +26,11 @@ class User < ApplicationRecord
     # beers.group(:style).average('ratings.score').sort_by { |style, avg| avg }.last.first()
     beers.group(:style).average('ratings.score').max_by { |_style, avg| avg }.first
   end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    # favorites = beers.group(:brewery).average('ratings.score').sort_by { |_brewery, avg| avg }
+    beers.group(:brewery).average('ratings.score').max_by { |_brewery, avg| avg }.first.name
+  end
 end

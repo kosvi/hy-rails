@@ -96,19 +96,53 @@ RSpec.describe User, type: :model do
       expect(user.favorite_style).to eq(beer.style)
     end
   end
+
+
+  describe "favorite brewery" do
+    let(:user){ FactoryBot.create(:user) }
+
+    it "has method for determining one" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+
+    it "without ratings does not have one" do 
+      expect(user.favorite_brewery).to eq(nil)
+    end
+
+    it "is the only rated if only one rating" do
+      beer = create_beer_with_rating({user: user}, 20)
+
+      expect(user.favorite_brewery).to eq(beer.brewery.name)
+    end
+
+    it "is the brewery with highest average rating if several rated" do
+      brewery1 = FactoryBot.create(:brewery, name: 'LessSuperBrew', year: 2001)
+      create_beers_with_many_ratings({user: user, brewery: brewery1}, 10, 20, 30)
+      brewery2 = FactoryBot.create(:brewery, name: 'SuperBrew', year: 2000)
+      beer = create_beer_with_rating({user: user, brewery: brewery2}, 25)
+
+      expect(user.favorite_brewery).to eq(beer.brewery.name)
+    end
+  end
+end
+
+def create_beer_with_brewery(object)
+  beer = FactoryBot.create(:beer, brewery: object[:brewery])
 end
 
 def create_beer_with_style(object)
-  if object[:style]
-    beer = FactoryBot.create(:beer, style: object[:style])
-  else
-    beer = FactoryBot.create(:beer)
-  end
-  beer
+  beer = FactoryBot.create(:beer, style: object[:style])
 end
 
 def create_beer_with_rating(object, score)
-  beer = create_beer_with_style(object)
+  if object[:style]
+    beer = create_beer_with_style(object)
+  elsif object[:brewery]
+    beer = create_beer_with_brewery(object)
+  else
+    beer = FactoryBot.create(:beer)
+  end
+
   FactoryBot.create(:rating, beer: beer, score: score, user: object[:user] )
   beer
 end
