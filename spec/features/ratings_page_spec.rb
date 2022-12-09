@@ -29,4 +29,14 @@ describe "Rating" do
     expect(beer1.ratings.count).to eq(1)
     expect(beer1.average_rating).to eq(15.0)
   end
+
+  it "list page lists all ratings from db and displays total count" do
+    create_beers_with_many_ratings({user: user, brewery: brewery}, 10, 20, 30)
+    visit ratings_path
+
+    expect(page).to have_content "anonymous 10 Pekka"
+    expect(page).to have_content "anonymous 20 Pekka"
+    expect(page).to have_content "anonymous 30 Pekka"
+    expect(page).to have_content "a total of 3 ratings"
+  end
 end

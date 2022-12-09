@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-include Helpers
-
 describe "Beer" do
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
 

@@ -4,6 +4,8 @@
   <% @ratings.each do |rating| %>
     <li> <%= render rating %> <%= link_to rating.user.username, rating.user %> </li>
   <% end %>
-
-  <%= link_to 'add new rating', new_rating_path %>
 </ul>
+
+<p>a total of <%= "#{pluralize(@ratings.count, 'rating')}" %></p>
+
+<%= link_to 'add new rating', new_rating_path %>
