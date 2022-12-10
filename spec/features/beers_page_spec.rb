@@ -1,9 +1,17 @@
 require 'rails_helper'
 
+include Helpers
+
 describe "Beer" do
+
+  before :each do
+    FactoryBot.create :user
+  end
+
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
 
   it "with a valid name is created and stored" do
+    sign_in(username: "Pekka", password: "Foobar1")
     visit new_beer_path
     fill_in('beer[name]', with: 'kalja')
     select('IPA', from: 'beer[style]')
@@ -18,6 +26,7 @@ describe "Beer" do
   end
 
   it "is not stored if name is not valid" do
+    sign_in(username: "Pekka", password: "Foobar1")
     visit new_beer_path
 
     expect{
