@@ -4,6 +4,8 @@ This is a mandatory exercise for [Ruby on Rails -course](https://github.com/mluu
 
 Live instance can be found at: [ratebeer.codecache.eu](https://ratebeer.codecache.eu)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/9059370eae45686a9f6d/maintainability)](https://codeclimate.com/github/kosvi/hy-rails/maintainability)
+
 ## INSTALLATION
 
 1. Clone repository
