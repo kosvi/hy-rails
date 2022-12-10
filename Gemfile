@@ -72,6 +72,7 @@ group :test do
   gem "launchy"
   gem "rspec-rails", "~> 6.0.0.rc1"
   gem "factory_bot_rails"
+  gem "simplecov", require: false
 end
 
 group :development, :test do
