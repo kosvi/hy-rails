@@ -11,7 +11,7 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-  test and lint:
+  test_and_lint:
     runs-on: ubuntu-22.04
     services:
       postgres:
