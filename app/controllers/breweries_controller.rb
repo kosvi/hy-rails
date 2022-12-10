@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
-  before_action :authenticate, only: [:destroy]
+  before_action :ensure_that_signed_in, except: [:index, :show]
 
   # GET /breweries or /breweries.json
   def index
@@ -68,17 +68,5 @@ class BreweriesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def brewery_params
     params.require(:brewery).permit(:name, :year)
-  end
-
-  def authenticate
-    admin_accounts = { "paavo" => "pesusieni", "foo" => "bar", "admin" => "secret" }
-    authenticate_or_request_with_http_basic do |username, password|
-      admin_accounts.each do |u, p|
-        if u == username && p == password
-          return true
-        end
-      end
-      raise "Wrong username or password"
-    end
   end
 end
