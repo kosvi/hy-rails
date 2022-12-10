@@ -4,7 +4,7 @@ include Helpers
 
 describe "User" do
   before :each do
-    FactoryBot.create :user
+    @user = FactoryBot.create :user
   end
 
   describe "who has signed up" do
@@ -30,6 +30,14 @@ describe "User" do
       expect(page).to have_content 'Username or password incorrect!'
     end
 
+    it "can delete own rating from database" do
+      create_beers_with_many_ratings({ user: @user }, 10, 15, 20)
+      sign_in(username: "Pekka", password: "Foobar1")
+      
+      expect{
+        page.all(:css, 'a.delete-rating-btn')[1].click
+      }.to change{Rating.count}.from(3).to(2)
+    end
   end
 
   it "when signed up with good credentials, is added to the system" do
@@ -41,5 +49,14 @@ describe "User" do
     expect{
       click_button('Create User')
     }.to change{User.count}.by(1)
+  end
+
+  it "when viewed will display favorite style and brewery" do
+    brewery = FactoryBot.create(:brewery, name: "SuperBrew")
+    create_beers_with_many_ratings({ user: @user, brewery: brewery }, 10, 15, 20)
+    visit user_path(@user)
+
+    expect(page).to have_content "beer style: Lager"
+    expect(page).to have_content "brewery: SuperBrew"
   end
 end
