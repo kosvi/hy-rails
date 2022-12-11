@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
+  # Places
+  get 'places', to: 'places#index'
+  post 'places', to: 'places#search'
 
   resource :session, only: [:new, :create, :destroy]
 
