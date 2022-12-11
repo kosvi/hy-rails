@@ -73,6 +73,7 @@ group :test do
   gem "rspec-rails", "~> 6.0.0.rc1"
   gem "factory_bot_rails"
   gem "simplecov", require: false
+  gem "webmock"
 end
 
 group :development, :test do
