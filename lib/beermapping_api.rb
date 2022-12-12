@@ -1,6 +1,7 @@
 class BeermappingApi
   def self.places_in(city)
-    url = "http://beermapping.com/webservice/loccity/#{key}/"
+    url = "https://beermapping.com/webservice/loccity/#{key}/"
+    # url = "http://beermapping.com/webservice/loccity/#{key}/" unless ENV["RAILS_ENV"] == "production"
 
     response = HTTParty.get "#{url}#{ERB::Util.url_encode(city)}"
     places = response.parsed_response["bmp_locations"]["location"]
