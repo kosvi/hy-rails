@@ -20,5 +20,8 @@ module Ratebeer
     # config.eager_load_paths << Rails.root.join("extras")
     config.autoload_paths << Rails.root.join("lib")
     config.eager_load_paths << Rails.root.join("lib")
+
+    # use memory_store as default cache
+    config.cache_store = :memory_store, { size: 32.megabytes }
   end
 end
