@@ -79,6 +79,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'pry-byebug'
+  gem 'dotenv-rails'
 end
 
 group :production do
@@ -86,4 +87,3 @@ group :production do
 end
 
 gem "httparty"
-

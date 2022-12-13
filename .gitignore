@@ -36,3 +36,4 @@
 
 postgres-db
 coverage
+.env
