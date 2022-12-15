@@ -9,11 +9,15 @@ class BeerClubsController < ApplicationController
 
   # GET /beer_clubs/1 or /beer_clubs/1.json
   def show
-    return unless Membership.where(user: current_user, beer_club: @beer_club).empty?
+    membership = Membership.where(user: current_user, beer_club: @beer_club)
 
-    @membership = Membership.new
-    @membership.beer_club = @beer_club
-    @membership.user = current_user
+    if membership.empty?
+      @membership = Membership.new
+      @membership.beer_club = @beer_club
+      @membership.user = current_user
+    else
+      @membership = membership[0]
+    end
   end
 
   # GET /beer_clubs/new

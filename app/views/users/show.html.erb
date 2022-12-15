@@ -30,7 +30,7 @@
 <h2>Clubs</h2>
 <ul>
 <% @user.beer_clubs.each do |club| %>
-  <li> <%= club %></li>
+  <li> <%= link_to club, club %></li>
 <% end %>
 </ul>
 <div>
