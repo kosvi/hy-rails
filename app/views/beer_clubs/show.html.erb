@@ -11,10 +11,12 @@
 
 <% if current_user %>
 
-  <%= form_with(model: @membership) do |form| %>
-    <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-    <%= form.submit "Join the club!" %>
+  <% if @membership %>
+    <%= form_with(model: @membership) do |form| %>
+      <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.submit "Join the club!" %>
+    <% end %>
   <% end %>
 
   <div>

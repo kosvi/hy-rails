@@ -9,6 +9,8 @@ class BeerClubsController < ApplicationController
 
   # GET /beer_clubs/1 or /beer_clubs/1.json
   def show
+    return unless Membership.where(user: current_user, beer_club: @beer_club).empty?
+
     @membership = Membership.new
     @membership.beer_club = @beer_club
     @membership.user = current_user
