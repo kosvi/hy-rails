@@ -37,3 +37,5 @@
 postgres-db
 coverage
 .env
+db/development.sqlite3.backup
+
