@@ -2,6 +2,6 @@ class Style < ApplicationRecord
   has_many :beers
 
   def to_s
-    self.name
+    name
   end
 end
