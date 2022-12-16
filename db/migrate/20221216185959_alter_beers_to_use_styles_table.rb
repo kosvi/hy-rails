@@ -7,9 +7,11 @@ class AlterBeersToUseStylesTable < ActiveRecord::Migration[7.0]
       beer.style_id = style.id
       beer.save
     end
+    remove_column :beers, :old_style
   end
 
   def down
+    add_column :beers, :old_style, :string
     Beer.all.each do |beer|
       style = beer.style
       beer.old_style = style.name
