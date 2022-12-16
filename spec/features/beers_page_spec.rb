@@ -9,12 +9,13 @@ describe "Beer" do
   end
 
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+  let!(:style) { FactoryBot.create :style, name: "IPA" }
 
   it "with a valid name is created and stored" do
     sign_in(username: "Pekka", password: "Foobar1")
     visit new_beer_path
     fill_in('beer[name]', with: 'kalja')
-    select('IPA', from: 'beer[style]')
+    select('IPA', from: 'beer[style_id]')
     
     expect{
       click_button "Create Beer"
