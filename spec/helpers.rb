@@ -33,4 +33,10 @@ module Helpers
       create_beer_with_rating(object, score)
     end
   end
+
+  def create_weather_for_place(city)
+    allow(WeathermappingApi).to receive(:weather_in).with(city).and_return(
+      Weather.new(temperature: 5, weather_icons: ["http://fake.image.url"], wind_speed: 5.5, wind_dir: "S")
+    )
+  end
 end

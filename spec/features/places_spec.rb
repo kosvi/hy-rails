@@ -1,7 +1,10 @@
 require 'rails_helper'
 
+include Helpers
+
 describe "Places" do
   it "if one is returned by the API, it is shown at the page" do
+    create_weather_for_place("kumpula")
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name: "Oljenkorsi", id: 1 ) ]
     )
@@ -14,6 +17,7 @@ describe "Places" do
   end
 
   it "if multiple is returned by the API, it displays all at the page" do
+    create_weather_for_place("kumpula")
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name: "Oljenkorsi1", id: 1 ), Place.new( name: "Oljenkorsi2", id: 2 ) ]
     )
@@ -27,6 +31,7 @@ describe "Places" do
   end
 
   it "are told not to exist on location if non returned by API" do
+    create_weather_for_place("kumpula")
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ ]
     )
