@@ -3,7 +3,9 @@ class PlacesController < ApplicationController
   end
 
   def search
+    @city = params[:city]
     @places = BeermappingApi.places_in(params[:city])
+    @weather = WeathermappingApi.weather_in(params[:city])
     if @places.empty?
       redirect_to places_path, notice: "No locations in #{params[:city]}"
     else
