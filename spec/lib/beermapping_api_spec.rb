@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "BeermappingApi" do
-    describe "in case of cache miss" do
+  describe "in case of cache miss" do
 
     before :each do
       Rails.cache.clear
