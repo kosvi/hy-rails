@@ -22,8 +22,8 @@ describe "Beer" do
     }.to change{Beer.count}.from(0).to(1)
 
     expect(page).to have_content "Beer was successfully created."
-    expect(page).to have_content "Name: kalja"
-    expect(page).to have_content "Style: IPA"
+    expect(page).to have_content "kalja"
+    expect(page).to have_content "IPA"
   end
 
   it "is not stored if name is not valid" do
