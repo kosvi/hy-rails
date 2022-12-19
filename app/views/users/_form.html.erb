@@ -13,22 +13,62 @@
 
   <% if @user.new_record? %>
     <div>
-      <%= form.label :username, style: "display: block" %>
-      <%= form.text_field :username %>
+      <%= form.label :username, class: "form-label" %>
+      <%= form.text_field :username, {:class => "form-control"} %>
     </div>
   <% end %>
 
   <div>
-    <%= form.label :password, style: "display: block"%>
-    <%= form.password_field :password %>
+    <%= form.label :password, class: "form-label" %>
+    <%= form.password_field :password, {:class => "form-control", "data-toggle" => "tooltip", "title" => "Must contain at least one capital letter"} %>
   </div>
   
   <div>
-    <%= form.label :password_confirmation, style: "display: block"%>
-    <%= form.password_field :password_confirmation %>
+    <%= form.label :password_confirmation, class: "form-label" %>
+    <%= form.password_field :password_confirmation, {:class => "form-control", "data-toggle" => "tooltip", "title" => "Must contain at least one capital letter"} %>
+  </div>
+
+  <div class="progress extra-margins-y">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+<script>
+// This is horrible script but it's just a quick hack!
+const userInput = document.getElementById("user_username")
+const passwordInput = document.getElementById("user_password")
+const confirmationInput = document.getElementById("user_password_confirmation")
+function updateStatus() {
+  let status = 0
+  if(userInput.value.length>0) {
+    status = status + 1
+  }
+  if(passwordInput.value.length>0) {
+    status = status + 1
+  }
+  if(confirmationInput.value.length>0) {
+    status = status + 1
+  }
+  percentage = Math.floor(status/3*100)
+  document.getElementsByClassName('progress-bar').item(0).setAttribute('aria-valuenow', percentage)
+  document.getElementsByClassName('progress-bar').item(0).setAttribute('style', `width: ${percentage}%`)
+}
+userInput.addEventListener('change', function() {
+  updateStatus()
+})
+passwordInput.addEventListener('change', function() {
+  updateStatus()
+})
+confirmationInput.addEventListener('change', function() {
+  updateStatus()
+})
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
