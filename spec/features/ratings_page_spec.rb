@@ -10,10 +10,6 @@ describe "Rating" do
   let!(:user2) { FactoryBot.create :user, username: "Paavo" }
 
   before :each do
-    # visit signin_path
-    # fill_in('username', with: 'Pekka')
-    # fill_in('password', with: 'Foobar1')
-    # click_button('Log in')
     sign_in(username: "Pekka", password: "Foobar1")
   end
 
@@ -34,16 +30,29 @@ describe "Rating" do
   describe "lists" do
 
     before :each do
-      create_beers_with_many_ratings({user: user, brewery: brewery}, 10, 20, 30)
+      create_beers_with_many_ratings({user: user, brewery: brewery}, 5, 10, 20, 30)
     end
 
-    it "all ratings from db and displays total count" do
+    it "list top 3 rated beers" do
       visit ratings_path
+      # Not really pretty, could be refactored one day ... 
+      expect(page.body).to include("        <tr>
+          <td>anonymous</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>anonymous</td>
+          <td>20</td>
+        </tr>
+        <tr>
+          <td>anonymous</td>
+          <td>10</td>
+        </tr>")
 
-      expect(page).to have_content "anonymous 10 Pekka"
-      expect(page).to have_content "anonymous 20 Pekka"
-      expect(page).to have_content "anonymous 30 Pekka"
-      expect(page).to have_content "a total of 3 ratings"
+      # expect(page).to have_content "anonymous 10 Pekka"
+      # expect(page).to have_content "anonymous 20 Pekka"
+      # expect(page).to have_content "anonymous 30 Pekka"
+      # expect(page).to have_content "a total of 3 ratings"
     end
 
     it "only users own ratings on profile page" do
