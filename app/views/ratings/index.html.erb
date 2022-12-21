@@ -1,11 +1,15 @@
 <h1>Ratings</h1>
 
-<ul>
-  <% @ratings.each do |rating| %>
-    <li> <%= render rating %> <%= link_to rating.user.username, rating.user %> </li>
-  <% end %>
-</ul>
+<%= render "top", top: @top_beers, type: "Beer" %>
 
-<p>a total of <%= "#{pluralize(@ratings.count, 'rating')}" %></p>
+<%= render "top", top: @top_breweries, type: "Brewery" %>
 
-<%= link_to 'add new rating', new_rating_path %>
+<h2>Recent ratings</h2>
+
+<div>
+  <ul>
+    <% @latest.each do |l| %>
+      <li><%= l %></li>
+    <% end %>
+  </ul>
+</div>
