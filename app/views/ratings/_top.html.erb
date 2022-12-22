@@ -9,7 +9,7 @@
       <% top.each do |t| %>
         <tr>
           <td><%= t.name %></td>
-          <td><%= t.average_rating %></td>
+          <td><%= round(t.average_rating) %></td>
         </tr>
       <% end %>
     </tbody>

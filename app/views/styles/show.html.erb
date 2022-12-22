@@ -10,9 +10,4 @@
   <% end %>
 </ul>
 
-<div>
-  <%= link_to "Edit this style", edit_style_path(@style) %> |
-  <%= link_to "Back to styles", styles_path %>
-
-  <%= button_to "Destroy this style", @style, method: :delete %>
-</div>
+<%= edit_and_destroy_buttons(@style) %>

@@ -38,21 +38,16 @@ describe "Rating" do
       # Not really pretty, could be refactored one day ... 
       expect(page.body).to include("        <tr>
           <td>anonymous</td>
-          <td>30</td>
+          <td>30.0</td>
         </tr>
         <tr>
           <td>anonymous</td>
-          <td>20</td>
+          <td>20.0</td>
         </tr>
         <tr>
           <td>anonymous</td>
-          <td>10</td>
+          <td>10.0</td>
         </tr>")
-
-      # expect(page).to have_content "anonymous 10 Pekka"
-      # expect(page).to have_content "anonymous 20 Pekka"
-      # expect(page).to have_content "anonymous 30 Pekka"
-      # expect(page).to have_content "a total of 3 ratings"
     end
 
     it "only users own ratings on profile page" do
