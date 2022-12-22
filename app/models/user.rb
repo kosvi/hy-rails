@@ -33,4 +33,9 @@ class User < ApplicationRecord
     # favorites = beers.group(:brewery).average('ratings.score').sort_by { |_brewery, avg| avg }
     beers.group(:brewery).average('ratings.score').max_by { |_brewery, avg| avg }.first.name
   end
+
+  def self.most_ratings(num)
+    sorted_by_number_of_ratings_in_desc_order = User.all.sort_by{ |u| u.ratings.count }.reverse!
+    sorted_by_number_of_ratings_in_desc_order.take(num)
+  end
 end
