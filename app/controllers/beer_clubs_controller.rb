@@ -1,4 +1,5 @@
 class BeerClubsController < ApplicationController
+  before_action :ensure_that_is_admin, only: %i[destroy]
   before_action :set_beer_club, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: [:index, :show]
 
