@@ -7,10 +7,10 @@ module ApplicationHelper
     return if current_user.nil?
 
     edit = link_to('Edit', url_for([:edit, item]), class: "btn btn-primary")
-    #del = link_to('Destroy', item, method: :delete,
+    # del = link_to('Destroy', item, method: :delete,
     #                               form: { data: { turbo_confirm: "Are you sure ?" } },
     #                               class: "btn btn-danger")
-    del = button_to('Destroy', item, method: :delete, class:"btn btn-danger")
+    del = button_to('Destroy', item, method: :delete, class: "btn btn-danger")
     raw("#{edit} #{del}")
   end
 end
