@@ -10,13 +10,31 @@ b1 = Brewery.create name: "Koff", year: 1897
 b2 = Brewery.create name: "Malmgard", year: 2001
 b3 = Brewery.create name: "Weihenstephaner", year: 1040
 
-be1 = b1.beers.create name: "Iso 3", style: "Lager"
-be2 = b1.beers.create name: "Karhu", style: "Lager"
-b1.beers.create name: "Tuplahumala", style: "Lager"
-be3 = b2.beers.create name: "Huvila Pale Ale", style: "Pale Ale"
-b2.beers.create name: "X Porter", style: "Porter"
-b3.beers.create name: "Hefeweizen", style: "Weizen"
-b3.beers.create name: "Helles", style: "Lager"
+s1 = Style.create name: "Lager"
+s2 = Style.create name: "Pale Ale"
+s3 = Style.create name: "Porter"
+
+be1 = b1.beers.new name: "Iso 3"
+be1.style = s1
+be1.save
+be2 = b1.beers.new name: "Karhu"
+be2.style = s1
+be2.save
+be3 = b1.beers.new name: "Tuplahumala"
+be3.style = s1
+be3.save
+be4 = b2.beers.new name: "Huvila Pale Ale"
+be4.style = s2
+be4.save
+be5 = b2.beers.new name: "X Porter"
+be5.style = s3
+br5.save
+be6 = b3.beers.new name: "Hefeweizen"
+be6.style = s2
+be6.save
+be7 = b3.beers.new name: "Helles"
+be7.style = s3
+be7.save
 
 u1 = User.create username: "testuser", password: "Test", password_confirmation: "Test"
 r1 = Rating.new score: 15
