@@ -2,7 +2,7 @@
   <h2>Username:</h2>
   <p>
     <%= @user.username %>
-    <% if current_user.admin %>
+    <% if current_user && current_user.admin? %>
       <%= link_to "#{@user.closed ? "activate" : "close"} account", toggle_status_user_path(@user.id), data: {turbo_method: "post"}, class: "btn #{@user.closed ? "btn-primary" : "btn-danger"}" %>
     <% end %>
   </p>
