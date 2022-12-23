@@ -20,7 +20,7 @@ services:
       RAILS_ENV: "production"
       BEERMAPPING_APIKEY: ${BEERMAPPING_APIKEY}
       WEATHER_APIKEY: ${WEATHER_APIKEY}
-      RAILS_SERVE_STATIC_FILES: true
+      RAILS_SERVE_STATIC_FILES: "true"
     ports:
       - 5005:3000
     container_name: ratebeer
