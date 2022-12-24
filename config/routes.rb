@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   resources :places, only: [:index, :show]
   post 'places', to: 'places#search'
 
+  get 'beerlist', to: 'beers#list'
+
   resource :session, only: [:new, :create, :destroy]
 
   resources :ratings, only: [:index, :new, :create, :destroy]
