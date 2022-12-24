@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post 'places', to: 'places#search'
 
   get 'beerlist', to: 'beers#list'
+  get 'brewerylist', to: 'breweries#list'
 
   resource :session, only: [:new, :create, :destroy]
 
