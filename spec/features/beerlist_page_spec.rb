@@ -39,4 +39,29 @@ describe "Beerlist page" do
     expect(second.text).to eq("Lechte Weisse")
     expect(third.text).to eq("Nikolai")
   end
+
+  it "should be able to sort by style", js:true do
+    visit beerlist_path
+    find("#style").click()
+    rows = find("#beertable").all(".tablerow")
+    # I think a helper could be useful here...
+    first = rows[0].first("td")
+    second = rows[1].first("td")
+    third = rows[2].first("td")
+    expect(first.text).to eq("Nikolai")
+    expect(second.text).to eq("Fastenbier")
+    expect(third.text).to eq("Lechte Weisse")
+  end
+
+  it "should be able to sort by brewery", js:true do
+    visit beerlist_path
+    find("#brewery").click()
+    rows = find("#beertable").all(".tablerow")
+    first = rows[0].first("td")
+    second = rows[1].first("td")
+    third = rows[2].first("td")
+    expect(first.text).to eq("Lechte Weisse")
+    expect(second.text).to eq("Nikolai")
+    expect(third.text).to eq("Fastenbier")
+  end
 end
