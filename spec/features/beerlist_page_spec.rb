@@ -28,4 +28,15 @@ describe "Beerlist page" do
     #find('table').find('tr:nth-child(2)')
     expect(page).to have_content "Nikolai"
   end
+
+  it "should list beers by name", js:true do
+    visit beerlist_path
+    rows = find("#beertable").all(".tablerow")
+    first = rows[0].first("td")
+    second = rows[1].first("td")
+    third = rows[2].first("td")
+    expect(first.text).to eq("Fastenbier")
+    expect(second.text).to eq("Lechte Weisse")
+    expect(third.text).to eq("Nikolai")
+  end
 end
