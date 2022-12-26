@@ -71,13 +71,11 @@ class MembershipsController < ApplicationController
 
   def confirm_membership
     club = @membership.beer_club
-    if club.users.include?(current_user)
-      @membership.confirmed = true
-      @membership.save
-      redirect_to club, notice: 'Application confirmed.'
-    elsif
-      redirect_to club, notice: 'Only members can confirm applications.'
-    end
+    return unless club.users.include?(current_user)
+
+    @membership.confirmed = true
+    @membership.save
+    redirect_to club, notice: 'Application confirmed.'
   end
 
   private
