@@ -80,6 +80,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry-byebug'
   gem 'dotenv-rails'
+  gem 'rack-mini-profiler'
 end
 
 group :production do
