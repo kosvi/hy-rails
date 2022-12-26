@@ -21,6 +21,7 @@ class BeerClubsController < ApplicationController
       @membership.user = current_user
     else
       @membership = membership[0]
+      @applications = Membership.where(beer_club: @beer_club, confirmed: false)
     end
   end
 
@@ -41,6 +42,7 @@ class BeerClubsController < ApplicationController
       if @beer_club.save
         format.html { redirect_to beer_club_url(@beer_club), notice: "Beer club was successfully created." }
         format.json { render :show, status: :created, location: @beer_club }
+        Membership.create(beer_club: @beer_club, user: current_user, confirmed: true)
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @beer_club.errors, status: :unprocessable_entity }

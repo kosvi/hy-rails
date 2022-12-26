@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: %i[show edit update destroy]
+  before_action :set_membership, only: %i[show edit update destroy confirm_membership]
+  before_action :ensure_that_signed_in, only: %i[confirm_membership]
 
   # GET /memberships or /memberships.json
   def index
@@ -31,10 +32,11 @@ class MembershipsController < ApplicationController
 
     @membership = Membership.new(membership_params)
     @membership.user = current_user
+    @membership.confirmed = false
 
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to beer_club_url(@membership.beer_club), notice: "#{current_user.username} welcome to the club." }
+        format.html { redirect_to beer_club_url(@membership.beer_club), notice: "Your application to #{@membership.beer_club.name} has been registered #{current_user.username}." }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all
@@ -64,6 +66,17 @@ class MembershipsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_url(current_user), notice: "Membership in #{@membership.beer_club.name} ended." }
       format.json { head :no_content }
+    end
+  end
+
+  def confirm_membership
+    club = @membership.beer_club
+    if club.users.include?(current_user)
+      @membership.confirmed = true
+      @membership.save
+      redirect_to club, notice: 'Application confirmed.'
+    elsif
+      redirect_to club, notice: 'Only members can confirm applications.'
     end
   end
 

@@ -7,6 +7,17 @@
 <% end %>
 </ul>
 
+<% if @applications && @membership.confirmed %>
+  <h2>Membership applications</h2>
+  <ul>
+    <% @applications.each do |application| %>
+      <li> <%= application.user.username %>
+        <%= link_to "confirm", confirm_membership_membership_path(application.id), data: {turbo_method: "post"}, class: "btn btn-primary" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% if current_user %>
 
   <% if @membership.id.nil? %>

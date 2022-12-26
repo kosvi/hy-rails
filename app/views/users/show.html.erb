@@ -34,6 +34,14 @@
   <li> <%= link_to club, club %></li>
 <% end %>
 </ul>
+<% if @user == current_user %>
+  <h4>Applications</h4>
+  <ul>
+  <% @applications.each do |application| %>
+    <li> <%= application.beer_club.name %></li>
+  <% end %>
+  </ul>
+<% end %>
 <div>
   <% if @user == current_user %>
     <%= link_to "Edit this user", edit_user_path(@user) %> |
