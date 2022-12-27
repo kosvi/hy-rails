@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_is_admin
     redirect_to signin_path, notice: 'login as admin to perform this action' unless current_user.admin?
   end
+
+  def expire_brewery_list
+    expire_fragment("brewerylist")
+  end
 end

@@ -1,45 +1,28 @@
-<h1>Breweries</h1>
+<h1>Listing breweries</h1>
 
-<h2>Active</h2>
+<% cache "brewerylist", skip_digest: true do %>
+  <p> Number of active breweries: <%= @active_breweries.count %> </p>
 
-<p> Number of active breweries: <%= @active_breweries.count %> </p>
-
-<div id="breweries">
-  <% @active_breweries.each do |brewery| %>
-    <div id="<%= dom_id brewery %>">
-      <p>
-        <%= link_to brewery.name, brewery %>
-      </p>
-    
-      <p>
-        <strong>Year:</strong>
-        <%= brewery.year %>
-      </p>
-    
-    </div>
-  <% end %>
-</div>
-
-<h2>Retired</h2>
-
-<p> Number of retired breweries: <%= @retired_breweries.count %> </p>
-
-<div id="retired_breweries">
-  <% @retired_breweries.each do |brewery| %>
-    <div id="<%= dom_id brewery %>">
-      <p>
-        <%= link_to brewery.name, brewery %>
-      </p>
-    
-      <p>
-        <strong>Year:</strong>
-        <%= brewery.year %>
-      </p>
-    
-    </div>
-  <% end %>
-</div>
-
-<p><%= link_to 'list of beers', beers_path %></p>
-
-<%= link_to('New brewery', new_brewery_path, class:'btn btn-primary') if current_user %>
+  <div id="active_breweries">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Founded</th>
+          <th>Beers</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @active_breweries.each do |brewery| %>
+          <tr>
+            <td><%= link_to brewery.name, brewery %></td>
+            <td><%= brewery.year %></td>
+            <td><%= brewery.beers.count %></td>
+            <td><%= round(brewery.average_rating) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

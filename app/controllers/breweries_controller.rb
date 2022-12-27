@@ -2,9 +2,11 @@ class BreweriesController < ApplicationController
   before_action :ensure_that_is_admin, only: %i[destroy]
   before_action :set_brewery, only: %i[show edit update destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
+  before_action :expire_brewery_list, except: [:index, :show, :list]
 
   # GET /breweries or /breweries.json
   def index
+    return if request.format.html? && fragment_exist?("brewerylist")
     @breweries = Brewery.all
     @active_breweries =  Brewery.active
     @retired_breweries = Brewery.retired

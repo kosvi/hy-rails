@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :expire_brewery_list, except: [:index]
+
   def index
     @ratings = Rating.all
     @top_breweries = Brewery.top 3
