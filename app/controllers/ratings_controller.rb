@@ -2,6 +2,7 @@ class RatingsController < ApplicationController
   before_action :expire_brewery_list, except: [:index]
 
   def index
+    # kato taa tehtavaan 12: https://stackoverflow.com/questions/8252112/rails-caching-continue-storing-expired-value
     @ratings = Rating.all
     @top_breweries = Brewery.top 3
     @top_beers = Beer.top 3
