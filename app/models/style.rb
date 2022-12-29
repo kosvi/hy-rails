@@ -7,9 +7,4 @@ class Style < ApplicationRecord
   def to_s
     name
   end
-
-  def self.top(num)
-    sorted_by_rating_in_desc_order = Style.all.sort_by(&:average_rating).reverse!
-    sorted_by_rating_in_desc_order.take(num)
-  end
 end

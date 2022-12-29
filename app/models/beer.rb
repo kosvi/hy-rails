@@ -13,11 +13,6 @@ class Beer < ApplicationRecord
     "#{name} by #{brewery.name}"
   end
 
-  def self.top(num)
-    sorted_by_rating_in_desc_order = Beer.all.sort_by(&:average_rating).reverse!
-    sorted_by_rating_in_desc_order.take(num)
-  end
-
   def average
     return 0 if ratings.empty?
 

@@ -15,11 +15,6 @@ class Brewery < ApplicationRecord
     name
   end
 
-  def self.top(num)
-    sorted_by_rating_in_desc_order = Brewery.all.sort_by(&:average_rating).reverse!
-    sorted_by_rating_in_desc_order.take(num)
-  end
-
   def restart
     self.year = Date.current.year
     puts "changed year to #{year}"

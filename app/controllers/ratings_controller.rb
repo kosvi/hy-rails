@@ -2,7 +2,13 @@ class RatingsController < ApplicationController
   before_action :expire_brewery_list, except: [:index]
 
   def index
-    # kato taa tehtavaan 12: https://stackoverflow.com/questions/8252112/rails-caching-continue-storing-expired-value
+    # Tämän cachettaminen pitäisi ratkaista, laajemman pohdinnan kautta:
+    # - jos halutaan/voidaan ottaa käyttöön redis-tietokanta, voidaan kakuttaa ajastetuilla funktioilla melko näppärästi
+    # - jos redis ei ole vaihtoehto, tarjolla olevat gemit vähenee dramaattisesti
+    #   - yksi vaihtoehto voisi olla DelayedJob -> https://github.com/tobi/delayed_job (näyttää kuitenkin aika kuolleelta)
+    #   - toinen vaihtoehto voisi olla whenever gemi, mutta tällöin tarvitaan mahdollisuus crontabin käyttöön
+    # Tähän ei ole helppoja ratkaisuja ja jokainen ratkaisu tuntuisi olevan alustariippuvainen.
+    # Tästä syystä jätän tehtävän tekemättä, koska mielestäni puolivillaisen ad hoc -ratkaisun väkertäminen ei ole mielekästä
     @ratings = Rating.all
     @top_breweries = Brewery.top 3
     @top_beers = Beer.top 3
